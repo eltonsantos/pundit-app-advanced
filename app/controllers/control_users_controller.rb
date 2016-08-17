@@ -1,6 +1,5 @@
 class ControlUsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show]
-  before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -39,6 +38,14 @@ class ControlUsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to control_users_path, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -47,7 +54,7 @@ class ControlUsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :manager_id, :editor_id, :active)
+      params.require(:user).permit(:name, :email, :manager_id, :editor_id, :password, :password_confirmation, :active)
     end
 
 end

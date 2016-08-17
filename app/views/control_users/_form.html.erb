@@ -1,0 +1,23 @@
+<% if current_user.admin? %>
+  <%= f.collection_select :manager_id, Manager.all, :id, :name, prompt: "Select a manager" %>
+<% elsif current_user.manager? %>
+  <%= f.collection_select :editor_id, Editor.all, :id, :name, prompt: "Select a editor" %>
+<% else %>
+  Nothing
+<% end %>
+
+<div class="field">
+  <%= f.label :email %><br>
+  <%= f.text_field :email %>
+</div>
+<div class="field">
+  <%= f.label :password %><br>
+  <%= f.password_field :password %>
+</div>
+<div class="field">
+  <%= f.label :password_confirmation %><br>
+  <%= f.password_field :password_confirmation %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>

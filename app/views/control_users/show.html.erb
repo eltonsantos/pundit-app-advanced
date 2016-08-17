@@ -1,0 +1,13 @@
+<p>Email</p>
+<p><%= @user.email %></p>
+<br>
+<p>Active</p>
+<p>
+  <% if @user.active == 1 %>
+    Sim
+  <% else %>
+    Não
+  <% end %>
+</p>
+
+<%= link_to "Voltar", :back %>
