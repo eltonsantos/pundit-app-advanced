@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @editor.name %>
+</p>
+
+<p>
+  <strong>Cpf:</strong>
+  <%= @editor.cpf %>
+</p>
+
+<%= link_to 'Edit', edit_editor_path(@editor) %> |
+<%= link_to 'Back', editors_path %>
