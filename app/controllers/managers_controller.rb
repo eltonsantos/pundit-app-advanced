@@ -5,6 +5,7 @@ class ManagersController < ApplicationController
   # GET /managers.json
   def index
     @managers = Manager.all
+    authorize @managers
   end
 
   # GET /managers/1

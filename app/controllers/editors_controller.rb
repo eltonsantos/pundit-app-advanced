@@ -5,6 +5,7 @@ class EditorsController < ApplicationController
   # GET /editors.json
   def index
     @editors = Editor.all
+    authorize @editors
   end
 
   # GET /editors/1

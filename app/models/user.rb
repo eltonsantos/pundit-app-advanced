@@ -4,6 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # Método para saber se é admin
+  def admin?
+    self.admin == true
+  end
+
   # Método para saber se é manager
   def manager?
     !self.manager_id.blank? && self.editor_id.blank? && self.admin == false
@@ -11,7 +16,7 @@ class User < ActiveRecord::Base
 
   # Método para saber se é editor
   def editor?
-    !self.manager_id.blank? && !self.editor_id.blank? && self.admin == false
+    self.manager_id.blank? && !self.editor_id.blank? && self.admin == false
   end
 
 end
