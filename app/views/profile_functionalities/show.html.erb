@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @profile_functionality.profile %>
+</p>
+
+<p>
+  <strong>Functionality:</strong>
+  <%= @profile_functionality.functionality %>
+</p>
+
+<%= link_to 'Edit', edit_profile_functionality_path(@profile_functionality) %> |
+<%= link_to 'Back', profile_functionalities_path %>

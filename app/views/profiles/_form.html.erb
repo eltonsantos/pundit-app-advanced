@@ -1,0 +1,44 @@
+<%= form_for(@profile) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if current_user.manager? %>
+    <%= f.hidden_field :manager_id, value: current_user.manager.id %>
+  <% elsif current_user.editor? %>
+    <%= f.hidden_field :manager_id, value: current_user.manager.id %>
+    <%= f.hidden_field :editor_id, value: current_user.editor.id %>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.check_box :active %>
+  </div>
+
+  <fieldset>
+    <legend>Functionalities</legend>
+    <% if current_user.admin? %>
+      <%= f.collection_check_boxes :functionality_ids, Functionality.all, :id, :description %>
+    <% else %>
+      <%= f.collection_check_boxes :functionality_ids, current_user.profile.functionalities, :id, :description %>
+    <% end %>
+  </fieldset>
+
+  <br>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

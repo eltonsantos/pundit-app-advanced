@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  manager_id: 
+  editor_id: 
+  active: false
+
+two:
+  description: MyString
+  manager_id: 
+  editor_id: 
+  active: false

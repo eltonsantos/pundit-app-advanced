@@ -4,6 +4,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Database authenticatable
       t.integer :manager_id
       t.integer :editor_id
+      t.integer :profile_id
+      t.integer :father_id
       t.boolean :active, default: true
       t.boolean :admin, default: false
       t.string :email,              null: false, default: ""

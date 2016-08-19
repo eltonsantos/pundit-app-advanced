@@ -4,6 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  belongs_to :manager
+  belongs_to :editor
+  belongs_to :profile
+  belongs_to :father, class_name: "User"
+
   # Método para saber se é admin
   def admin?
     self.admin == true

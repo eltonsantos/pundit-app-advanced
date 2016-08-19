@@ -5,8 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Cpf</th>
+      <th>Description</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,8 +13,7 @@
   <tbody>
     <% @editors.each do |editor| %>
       <tr>
-        <td><%= editor.name %></td>
-        <td><%= editor.cpf %></td>
+        <td><%= editor.description %></td>
         <td><%= link_to 'Show', editor %></td>
         <td><%= link_to 'Edit', edit_editor_path(editor) %></td>
         <td><%= link_to 'Destroy', editor, method: :delete, data: { confirm: 'Are you sure?' } %></td>

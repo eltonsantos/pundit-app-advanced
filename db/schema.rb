@@ -11,25 +11,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817125606) do
+ActiveRecord::Schema.define(version: 20160819125626) do
 
   create_table "editors", force: :cascade do |t|
-    t.string   "name"
-    t.string   "cpf"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "description"
+    t.integer  "manager_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "editors", ["manager_id"], name: "index_editors_on_manager_id"
+
+  create_table "functionalities", force: :cascade do |t|
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "managers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "cpf"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "managers", ["user_id"], name: "index_managers_on_user_id"
+
+  create_table "profile_functionalities", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "functionality_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "profile_functionalities", ["functionality_id"], name: "index_profile_functionalities_on_functionality_id"
+  add_index "profile_functionalities", ["profile_id"], name: "index_profile_functionalities_on_profile_id"
+
+  create_table "profile_users", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "profile_users", ["profile_id"], name: "index_profile_users_on_profile_id"
+  add_index "profile_users", ["user_id"], name: "index_profile_users_on_user_id"
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "manager_id"
+    t.integer  "editor_id"
+    t.boolean  "active",      default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "profiles", ["editor_id"], name: "index_profiles_on_editor_id"
+  add_index "profiles", ["manager_id"], name: "index_profiles_on_manager_id"
 
   create_table "users", force: :cascade do |t|
     t.integer  "manager_id"
     t.integer  "editor_id"
+    t.integer  "profile_id"
+    t.integer  "father_id"
     t.boolean  "active",                 default: true
     t.boolean  "admin",                  default: false
     t.string   "email",                  default: "",    null: false

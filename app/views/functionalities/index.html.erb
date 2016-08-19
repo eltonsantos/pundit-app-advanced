@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Functionalities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @functionalities.each do |functionality| %>
+      <tr>
+        <td><%= functionality.description %></td>
+        <td><%= link_to 'Show', functionality %></td>
+        <td><%= link_to 'Edit', edit_functionality_path(functionality) %></td>
+        <td><%= link_to 'Destroy', functionality, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Functionality', new_functionality_path %>

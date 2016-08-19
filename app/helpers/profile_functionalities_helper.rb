@@ -1,0 +1,2 @@
+module ProfileFunctionalitiesHelper
+end

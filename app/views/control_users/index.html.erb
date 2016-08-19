@@ -10,6 +10,8 @@
       <th>Manager?</th>
       <th>Editor?</th>
       <th>Active</th>
+      <th>Profile</th>
+      <th>Father</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,10 +20,12 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= user.admin.present? ? "Yes" : "No" %></td>
-        <td><%= user.manager_id.present? ? "Yes" : "No" %></td>
-        <td><%= user.editor_id.present? ? "Yes" : "No" %></td>
-        <td><%= user.active.present? ? "Yes" : "No" %></td>
+        <td><center><%= user.admin.present? ? "Yes" : "No" %></center></td>
+        <td><center><%= user.manager_id.present? ? "Yes" : "No" %></center></td>
+        <td><center><%= user.editor_id.present? ? "Yes" : "No" %></center></td>
+        <td><center><%= user.active.present? ? "Yes" : "No" %></center></td>
+        <td><center><%= user.profile_id.present? ? user.profile.description : "---" %></center></td>
+        <td><center><%= user.father_id.present? ? user.father.email : "---" %></center></td>
         <td><%= link_to 'Show', control_user_path(user) %></td>
         <td><%= link_to 'Destroy', control_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

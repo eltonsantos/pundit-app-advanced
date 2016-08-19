@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Profile Functionalities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Profile</th>
+      <th>Functionality</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @profile_functionalities.each do |profile_functionality| %>
+      <tr>
+        <td><%= profile_functionality.profile %></td>
+        <td><%= profile_functionality.functionality %></td>
+        <td><%= link_to 'Show', profile_functionality %></td>
+        <td><%= link_to 'Edit', edit_profile_functionality_path(profile_functionality) %></td>
+        <td><%= link_to 'Destroy', profile_functionality, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Profile functionality', new_profile_functionality_path %>

@@ -70,6 +70,6 @@ class EditorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def editor_params
-      params.require(:editor).permit(:name, :cpf)
+      params.require(:editor).permit(:description, :manager_id)
     end
 end
