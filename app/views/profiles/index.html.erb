@@ -17,8 +17,8 @@
     <% @profiles.each do |profile| %>
       <tr>
         <td><%= profile.description %></td>
-        <td><%= profile.manager %></td>
-        <td><%= profile.editor %></td>
+        <td><%= profile.manager_id.present? ? profile.manager.description : "---" %></td>
+        <td><%= profile.editor_id.present? ? profile.editor.description : "---" %></td>
         <td><%= profile.active %></td>
         <td><%= link_to 'Show', profile %></td>
         <td><%= link_to 'Edit', edit_profile_path(profile) %></td>

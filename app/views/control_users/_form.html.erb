@@ -1,7 +1,23 @@
 <% if current_user.admin? %>
-  <%= f.collection_select :manager_id, Manager.all, :id, :name, prompt: "Select a manager" %>
+  <%= f.hidden_field :father_id, value: current_user.id %>
+  <%= f.collection_select :manager_id, Manager.all, :id, :description, prompt: "Select a manager" %>
+  <br /><br />
+  Profile
+  <%= f.collection_radio_buttons :profile_id, Profile.all, :id, :description %>
+  <hr />
+
 <% elsif current_user.manager? %>
-  <%= f.collection_select :editor_id, Editor.all, :id, :name, prompt: "Select a editor" %>
+  <%= f.hidden_field :father_id, value: current_user.id %>
+  <%= f.hidden_field :manager_id, value: current_user.manager.id %>
+  <%= f.hidden_field :profile_id, value: current_user.profile.id %>
+  <%= current_user.manager.description %>
+  <br />
+  <%= f.collection_select :editor_id, Editor.all, :id, :description, prompt: "Select a editor" %>
+  <br />
+  Profile
+  <br />
+  <%= f.collection_radio_buttons :profile_id, Profile.where(manager_id: current_user.manager_id), :id, :description %>
+  <br />
 <% else %>
   Nothing
 <% end %>

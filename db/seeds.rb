@@ -18,10 +18,10 @@ Functionality.create description: "Functionality 2"
 Functionality.create description: "Functionality 3"
 Functionality.create description: "Functionality 4"
 
-Profile.create description: "Profile Manager"
+Profile.create description: "Profile created by Manager", manager_id: 1
 ProfileFunctionality.create profile_id: 1, functionality_id: 1
 ProfileFunctionality.create profile_id: 1, functionality_id: 2
 
-Profile.create description: "Profile Editor"
+Profile.create description: "Profile created by Editor", editor_id: 1
 ProfileFunctionality.create profile_id: 2, functionality_id: 3
 ProfileFunctionality.create profile_id: 2, functionality_id: 4
