@@ -1,5 +1,7 @@
 class ManagersController < ApplicationController
   before_action :set_manager, only: [:show, :edit, :update, :destroy]
+  before_action { authorize :manager, :all? }
+  before_action :verify_authorized
 
   # GET /managers
   # GET /managers.json
