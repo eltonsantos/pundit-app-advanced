@@ -7,12 +7,12 @@
 
 <p>
   <strong>Manager:</strong>
-  <%= @profile.manager.description %>
+  <%= @profile.manager_id.present? ? @profile.manager.description : "---" %>
 </p>
 
 <p>
   <strong>Editor:</strong>
-  <%= @profile.editor.description %>
+  <%= @profile.editor_id.present? ? @profile.editor.description : "---" %>
 </p>
 
 <p>
