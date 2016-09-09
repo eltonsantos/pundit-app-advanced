@@ -31,8 +31,12 @@
         <% if policy(@profile).show? %>
           <td><%= link_to 'Show', profile %></td>
         <% end %>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if policy(@profile).edit? %>
+          <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
+        <% end %>
+        <% if policy(@profile).delete? %>
+          <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
