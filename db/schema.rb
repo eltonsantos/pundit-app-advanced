@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819125626) do
+ActiveRecord::Schema.define(version: 20160909183547) do
 
   create_table "editors", force: :cascade do |t|
     t.string   "description"
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20160819125626) do
   end
 
   add_index "managers", ["user_id"], name: "index_managers_on_user_id"
+
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.string   "role"
+    t.boolean  "can_create"
+    t.boolean  "can_read"
+    t.boolean  "can_update"
+    t.boolean  "can_delete"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "permissions", ["profile_id"], name: "index_permissions_on_profile_id"
 
   create_table "profile_functionalities", force: :cascade do |t|
     t.integer  "profile_id"

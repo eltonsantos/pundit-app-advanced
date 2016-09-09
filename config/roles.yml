@@ -1,0 +1,6 @@
+roles:
+  - manager
+  - user
+  - editor
+  - profile
+  - functionality

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profile_id: 
+  role: MyString
+  can_create: false
+  can_read: false
+  can_update: false
+  can_delete: false
+
+two:
+  profile_id: 
+  role: MyString
+  can_create: false
+  can_read: false
+  can_update: false
+  can_delete: false

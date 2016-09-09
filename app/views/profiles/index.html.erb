@@ -28,7 +28,9 @@
           </ul>
         </td>
         <td><center><%= profile.active %></center></td>
-        <td><%= link_to 'Show', profile %></td>
+        <% if policy(@profile).show? %>
+          <td><%= link_to 'Show', profile %></td>
+        <% end %>
         <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
         <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
