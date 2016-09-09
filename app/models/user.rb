@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   belongs_to :editor
   belongs_to :profile
   belongs_to :father, class_name: "User"
+  has_many :permissions, through: :profile
 
   # Método para saber se é admin
   def admin?
@@ -22,6 +23,10 @@ class User < ActiveRecord::Base
   # Método para saber se é editor
   def editor?
     self.manager_id.blank? && !self.editor_id.blank? && self.admin == false
+  end
+
+  def profile(role)
+    self.permissions.find_by(:role => role) || Permission.new
   end
 
 end

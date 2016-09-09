@@ -1,20 +1,15 @@
 class EditorsController < ApplicationController
   before_action :set_editor, only: [:show, :edit, :update, :destroy]
-  before_action { authorize :editor, :all? }
-  before_action :verify_authorized
-  # after_save :verify_authorized
 
   # GET /editors
   # GET /editors.json
   def index
     @editors = Editor.all
-    # authorize @editors
   end
 
   # GET /editors/1
   # GET /editors/1.json
   def show
-    # authorize @editor
   end
 
   # GET /editors/new
