@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
     self.manager_id.blank? && !self.editor_id.blank? && self.admin == false
   end
 
-  def profile(role)
-    self.permissions.find_by(:role => role) || Permission.new
+  def permission(role)
+    self.permission.find_by(:role => role) || Permission.new
   end
 
 end
