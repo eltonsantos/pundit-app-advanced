@@ -5,13 +5,13 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = Profile.all
-    #authorize @profiles
+    # authorize @profiles
   end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    #authorize @profile
+    # authorize @profile
   end
 
   # GET /profiles/new
