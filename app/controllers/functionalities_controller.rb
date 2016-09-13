@@ -5,7 +5,7 @@ class FunctionalitiesController < ApplicationController
   # GET /functionalities.json
   def index
     @functionalities = Functionality.all
-    # authorize Functionality
+    authorize Functionality
   end
 
   # GET /functionalities/1
