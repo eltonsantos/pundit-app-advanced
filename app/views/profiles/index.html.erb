@@ -28,15 +28,16 @@
           </ul>
         </td>
         <td><center><%= profile.active %></center></td>
-        <% if policy(@profile).show? %>
+        <% if policy(profile).show? # porque tu já tens o proofile definido pelo each na linha 18 %>
           <td><%= link_to 'Show', profile %></td>
         <% end %>
-        <% if policy(@profile).edit? %>
+        <% if policy(profile).edit? %>
           <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
         <% end %>
-        <% if policy(@profile).delete? %>
+        <% if policy(profile).destroy? %>
           <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+
       </tr>
     <% end %>
   </tbody>
@@ -44,4 +45,4 @@
 
 <br>
 
-<%= link_to 'New Profile', new_profile_path %>
+<%= link_to 'New Profile', new_profile_path if policy(Profile).create? %>

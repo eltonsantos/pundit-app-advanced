@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def permission(role)
-    self.permission.find_by(:role => role) || Permission.new
+    self.permissions.find_by(:role => role) || Permission.new
   end
 
 end

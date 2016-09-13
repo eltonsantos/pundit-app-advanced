@@ -53,7 +53,7 @@ class ApplicationPolicy
   end
 
   def permission
-    user.permission(role_name)
+    @permission ||= user.permission(role_name)
   end
 
   protected
