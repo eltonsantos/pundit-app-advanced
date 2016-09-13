@@ -5,11 +5,13 @@ class FunctionalitiesController < ApplicationController
   # GET /functionalities.json
   def index
     @functionalities = Functionality.all
+    # authorize Functionality
   end
 
   # GET /functionalities/1
   # GET /functionalities/1.json
   def show
+    authorize @functionality
   end
 
   # GET /functionalities/new

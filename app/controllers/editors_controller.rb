@@ -10,6 +10,7 @@ class EditorsController < ApplicationController
   # GET /editors/1
   # GET /editors/1.json
   def show
+    authorize @editor
   end
 
   # GET /editors/new

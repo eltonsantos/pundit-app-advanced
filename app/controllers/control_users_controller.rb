@@ -6,6 +6,7 @@ class ControlUsersController < ApplicationController
   end
 
   def show
+    authorize @user
   end
 
   def new

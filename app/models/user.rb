@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
     self.manager_id.blank? && !self.editor_id.blank? && self.admin == false
   end
 
+  # Método para da permissão aos usuários do sistema
   def permission(role)
     self.permissions.find_by(:role => role) || Permission.new
   end

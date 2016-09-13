@@ -2,7 +2,7 @@
 
 <h1>Listing Users</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>Email</th>
@@ -26,8 +26,12 @@
         <td><center><%= user.active.present? ? "Yes" : "No" %></center></td>
         <td><center><%= user.profile_id.present? ? user.profile.description : "---" %></center></td>
         <td><center><%= user.father_id.present? ? user.father.email : "---" %></center></td>
-        <td><%= link_to 'Show', control_user_path(user) %></td>
-        <td><%= link_to 'Destroy', control_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if policy(user).show? %>
+          <td><%= link_to 'Show', control_user_path(user) %></td>
+        <% end %>
+        <% if policy(user).destroy? %>
+          <td><%= link_to 'Destroy', control_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -35,4 +39,4 @@
 
 <br>
 
-<%= link_to 'New User', new_control_user_path %>
+<%= link_to 'New User', new_control_user_path if policy(User).create? %>

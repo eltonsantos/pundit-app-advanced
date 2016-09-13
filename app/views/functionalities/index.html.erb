@@ -2,7 +2,7 @@
 
 <h1>Listing Functionalities</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>Description</th>
@@ -14,9 +14,15 @@
     <% @functionalities.each do |functionality| %>
       <tr>
         <td><%= functionality.description %></td>
-        <td><%= link_to 'Show', functionality %></td>
-        <td><%= link_to 'Edit', edit_functionality_path(functionality) %></td>
-        <td><%= link_to 'Destroy', functionality, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if policy(functionality).show? %>
+          <td><%= link_to 'Show', functionality %></td>
+        <% end %>
+        <% if policy(functionality).edit? %>
+          <td><%= link_to 'Edit', edit_functionality_path(functionality) %></td>
+        <% end %>
+        <% if policy(functionality).destroy? %>
+          <td><%= link_to 'Destroy', functionality, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Functionality', new_functionality_path %>
+<%= link_to 'New Functionality', new_functionality_path if policy(Functionality).create? %>

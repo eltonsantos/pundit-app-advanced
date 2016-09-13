@@ -2,7 +2,7 @@
 
 <h1>Listing Editors</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>Description</th>
@@ -14,9 +14,15 @@
     <% @editors.each do |editor| %>
       <tr>
         <td><%= editor.description %></td>
-        <td><%= link_to 'Show', editor %></td>
-        <td><%= link_to 'Edit', edit_editor_path(editor) %></td>
-        <td><%= link_to 'Destroy', editor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if policy(editor).show? %>
+          <td><%= link_to 'Show', editor %></td>
+        <% end %>
+        <% if policy(editor).edit? %>
+          <td><%= link_to 'Edit', edit_editor_path(editor) %></td>
+        <% end %>
+        <% if policy(editor).destroy? %>
+          <td><%= link_to 'Destroy', editor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,5 +30,4 @@
 
 <br>
 
-<%= link_to 'New Editor', new_editor_path %>
-
+<%= link_to 'New Editor', new_editor_path if policy(Editor).create? %>

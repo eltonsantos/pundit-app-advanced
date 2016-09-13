@@ -10,6 +10,7 @@ class ManagersController < ApplicationController
   # GET /managers/1
   # GET /managers/1.json
   def show
+    authorize @manager
   end
 
   # GET /managers/new
