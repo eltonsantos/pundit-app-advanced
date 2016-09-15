@@ -20,5 +20,11 @@
   <%= @profile.active %>
 </p>
 
+<% if policy(@profile).say_hello? %>
+  <%= link_to 'Say Hello!', profile_say_hello_path(@profile) %>
+<% end %>
+
+<br /><br />
+
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>

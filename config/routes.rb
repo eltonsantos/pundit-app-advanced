@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :profile_users
   resources :profile_functionalities
   resources :functionalities
-  resources :profiles
+  resources :profiles do
+    get 'say_hello'
+  end
   get 'home/index'
 
   resources :editors

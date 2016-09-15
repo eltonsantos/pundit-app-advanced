@@ -33,6 +33,17 @@
   <br/>
 
   <fieldset>
+    <legend>Functionalities</legend>
+    <% if current_user.admin? %>
+      <%= f.collection_check_boxes :functionality_ids, Functionality.all, :id, :description %>
+    <% else %>
+      <%= f.collection_check_boxes :functionality_ids, current_user.profile.functionalities, :id, :description %>
+    <% end %>
+  </fieldset>
+
+  <br />
+
+  <fieldset>
     <legend>Permissões</legend>
 
     <% f.object.permissions.in_groups_of(2, false) do |group| %>

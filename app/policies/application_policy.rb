@@ -24,6 +24,10 @@ class ApplicationPolicy
     can_list?
   end
 
+  def say_hello?
+    can_say_hello?
+  end
+
   def show?
     can_show?
   end
@@ -57,6 +61,10 @@ class ApplicationPolicy
   end
 
   protected
+
+  def can_say_hello?
+    permission.can_read?
+  end
 
   def can_list?
     permission.can_read?
