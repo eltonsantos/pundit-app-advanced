@@ -1,4 +1,17 @@
-User.create admin: true, email: "admin@admin.com", password: "12345678", active: true
+profile = Profile.create description: "Profile created by admin"
+Role.roles.map do |role, _|
+  profile.permissions.create role: role, can_create: 1, can_read: 1, can_update: 1, can_delete: 1
+end
+
+Profile.create description: "Profile created by Manager", manager_id: 1
+#ProfileFunctionality.create profile_id: 1, functionality_id: 1
+#ProfileFunctionality.create profile_id: 1, functionality_id: 2
+
+Profile.create description: "Profile created by Editor", editor_id: 1
+#ProfileFunctionality.create profile_id: 2, functionality_id: 3
+#ProfileFunctionality.create profile_id: 2, functionality_id: 4
+
+User.create admin: true, email: "admin@admin.com", password: "12345678", active: true, profile: profile
 User.create admin: false, manager_id: 1, email: "manager@manager.com", password: "12345678", active: true, father_id: 1
 User.create admin: false, editor_id: 1, email: "editor@editor.com", password: "12345678", active: true, father_id: 2
 
@@ -30,14 +43,3 @@ Functionality.create description: "Visualizar editor"
 Functionality.create description: "Editar editor"
 Functionality.create description: "Remover editor"
 Functionality.create description: "Criar editor"
-
-profile = Profile.create description: "Profile created by Manager", manager_id: 1
-Role.roles.map do |role, _|
-  profile.permissions.create role: role, can_create: 1, can_read: 1, can_update: 1, can_delete: 1
-end
-#ProfileFunctionality.create profile_id: 1, functionality_id: 1
-#ProfileFunctionality.create profile_id: 1, functionality_id: 2
-
-Profile.create description: "Profile created by Editor", editor_id: 1
-#ProfileFunctionality.create profile_id: 2, functionality_id: 3
-#ProfileFunctionality.create profile_id: 2, functionality_id: 4
