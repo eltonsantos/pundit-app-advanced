@@ -17,10 +17,13 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
+
+    build_roles_in @profile
   end
 
   # GET /profiles/1/edit
   def edit
+    build_roles_in @profile
   end
 
   # POST /profiles
@@ -33,6 +36,8 @@ class ProfilesController < ApplicationController
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
+        build_roles_in @profile
+
         format.html { render :new }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
@@ -47,6 +52,8 @@ class ProfilesController < ApplicationController
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
+        build_roles_in @profile
+
         format.html { render :edit }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
@@ -69,8 +76,31 @@ class ProfilesController < ApplicationController
       @profile = Profile.find(params[:id])
     end
 
+  def build_roles_in(profile)
+    roles = Role.roles.map { |role, _| role.to_s }
+    used_roles = []
+
+    profile.permissions.each do |permission|
+      used_roles << permission.role
+
+      permission.destroy unless roles.include?(permission.role)
+    end
+
+    roles.each do |role|
+      next if role.in?(used_roles)
+
+      profile.permissions.build(role: role)
+    end
+  end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:description, :manager_id, :editor_id, :active, functionality_ids: [])
+      params.require(:profile).permit(
+        :description, :active,
+        functionality_ids: [],
+        permissions_attributes: [
+          :id, :role, :can_read, :can_create, :can_update, :can_delete, :_destroy
+        ]
+      )
     end
 end

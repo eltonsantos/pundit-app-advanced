@@ -11,34 +11,50 @@
     </div>
   <% end %>
 
-  <% if current_user.manager? %>
-    <%= f.hidden_field :manager_id, value: current_user.manager.id %>
-  <% elsif current_user.editor? %>
-    <%= f.hidden_field :manager_id, value: current_user.manager.id %>
-    <%= f.hidden_field :editor_id, value: current_user.editor.id %>
-  <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, class: "form-control" %>
   </div>
-  <div class="field">
+
+  <br/>
+
+  <div class="form-group">
     <%= f.label :active %><br>
-    <%= f.check_box :active %>
+    <%= f.check_box :active, class: "form-control" %>
   </div>
+
+  <br/>
 
   <fieldset>
-    <legend>Functionalities</legend>
-    <% if current_user.admin? %>
-      <%= f.collection_check_boxes :functionality_ids, Functionality.all, :id, :description %>
-    <% else %>
-      <%= f.collection_check_boxes :functionality_ids, current_user.profile.functionalities, :id, :description %>
+    <legend>Permissões</legend>
+
+    <% f.object.permissions.in_groups_of(2, false) do |group| %>
+      <div class="row">
+        <% group.each do |permission| %>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%= f.fields_for :permissions, permission do |p| %>
+              <%= render 'permission', f: p %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   </fieldset>
 
-  <br>
-
   <div class="actions">
-    <%= f.submit %>
+    <%= button_tag(type: 'submit', class:"btn btn-sm btn-success", data: { disable_with: "Aguardando..." }) do %>
+      <i class="fa fa-save"></i>
+      <strong>Salvar</strong>
+    <% end %>
+
+    <%= link_to(@profile, class: "btn btn-sm btn-primary") do %>
+      <i class="fa fa-eye"></i>
+      <span>Mostrar</span>
+    <% end if policy(@profile).show? %>
+
+    <%= link_to(profiles_path, class: "btn btn-sm btn-default") do %>
+      <i class="fa fa-exchange"></i>
+      <span>Voltar</span>
+    <% end if policy(@profile).index? %>
   </div>
 <% end %>

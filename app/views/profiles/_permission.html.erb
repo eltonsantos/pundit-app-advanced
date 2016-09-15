@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h4><%= Role.role(f.object.role) %></h4>
+    <%= f.hidden_field :id if f.object.persisted? %>
+    <%= f.hidden_field :role %>
+  </div>
+</div>
+
+<div class="row form-group">
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :can_read, class: "label-checkbox inline" do %>
+      <%= f.check_box :can_read %>
+      <%= raw "#{t('permission.can_read')}" %>
+    <% end %>
+  </div>
+
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :can_create, class: "label-checkbox" do %>
+      <%= f.check_box :can_create %>
+      <%= raw "#{t('permission.can_create')}" %>
+    <% end %>
+  </div>
+
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :can_update, class: "label-checkbox" do %>
+      <%= f.check_box :can_update %>
+      <%= raw "#{t('permission.can_update')}" %>
+    <% end %>
+  </div>
+
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <%= f.label :can_delete, class: "label-checkbox" do %>
+      <%= f.check_box :can_delete %>
+      <%= raw "#{t('permission.can_delete')}" %>
+    <% end %>
+  </div>
+  <br/>
+  <hr/>
+</div>
