@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = Profile.all
+    authorize Profile
     #authorize Profile # está correto, mas pode usar (authorize :profile) também
   end
 
@@ -17,13 +18,14 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
-
     build_roles_in @profile
+    authorize @profile
   end
 
   # GET /profiles/1/edit
   def edit
     build_roles_in @profile
+    authorize @profile
   end
 
   # POST /profiles

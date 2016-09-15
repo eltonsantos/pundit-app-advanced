@@ -5,6 +5,7 @@ class EditorsController < ApplicationController
   # GET /editors.json
   def index
     @editors = Editor.all
+    authorize @editors
   end
 
   # GET /editors/1
@@ -16,10 +17,12 @@ class EditorsController < ApplicationController
   # GET /editors/new
   def new
     @editor = Editor.new
+    authorize @editor
   end
 
   # GET /editors/1/edit
   def edit
+    authorize @editor
   end
 
   # POST /editors
