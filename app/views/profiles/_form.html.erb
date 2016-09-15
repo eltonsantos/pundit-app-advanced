@@ -11,6 +11,13 @@
     </div>
   <% end %>
 
+  <% if current_user.manager? %>
+    <%= f.hidden_field :manager_id, value: current_user.manager.id %>
+  <% elsif current_user.editor? %>
+    <%= f.hidden_field :manager_id, value: current_user.manager.id %>
+    <%= f.hidden_field :editor_id, value: current_user.editor.id %>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :description %><br>
     <%= f.text_field :description, class: "form-control" %>

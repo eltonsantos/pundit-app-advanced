@@ -3,7 +3,6 @@ class ControlUsersController < ApplicationController
 
   def index
     @users = User.all
-    authorize @users
   end
 
   def show
@@ -12,7 +11,6 @@ class ControlUsersController < ApplicationController
 
   def new
     @user = User.new
-    authorize @user
   end
 
   def edit
