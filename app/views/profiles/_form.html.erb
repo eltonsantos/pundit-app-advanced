@@ -30,17 +30,6 @@
     <%= f.check_box :active, class: "form-control" %>
   </div>
 
-  <br/>
-
-  <fieldset>
-    <legend>Functionalities</legend>
-    <% if current_user.admin? %>
-      <%= f.collection_check_boxes :functionality_ids, Functionality.all, :id, :description %>
-    <% else %>
-      <%= f.collection_check_boxes :functionality_ids, current_user.profile.functionalities, :id, :description %>
-    <% end %>
-  </fieldset>
-
   <br />
 
   <fieldset>
@@ -50,8 +39,12 @@
       <div class="row">
         <% group.each do |permission| %>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <%= f.fields_for :permissions, permission do |p| %>
-              <%= render 'permission', f: p %>
+            <% if current_user.admin? %>
+              <%= f.fields_for :permissions, permission do |p| %>
+                <%= render 'permission', f: p %>
+              <% end %>
+            <% else %>
+              <%= f.collection_check_boxes :permissions, current_user.profile.permissions, :id, :role %>
             <% end %>
           </div>
         <% end %>
