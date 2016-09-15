@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = Profile.all
-    authorize Profile
+    authorize @profiles
     #authorize Profile # está correto, mas pode usar (authorize :profile) também
   end
 
