@@ -30,8 +30,8 @@
     <%= f.check_box :active, class: "form-control" %>
   </div>
 
-  <br />
-
+  <br/>
+  
   <fieldset>
     <legend>Permissões</legend>
 
@@ -44,7 +44,7 @@
                 <%= render 'permission', f: p %>
               <% end %>
             <% else %>
-              <%= f.collection_check_boxes :permissions, current_user.profile.permissions, :id, :role %>
+              <%= f.collection_check_boxes :permission, current_user.profile.permissions, :id, :role %>
             <% end %>
           </div>
         <% end %>
