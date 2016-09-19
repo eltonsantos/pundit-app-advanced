@@ -1,7 +1,14 @@
-roles:
-  - manager
-  - user
-  - editor
-  - profile
-  - functionality
-  - user_block
+role:
+  roles:
+    - manager:
+    - user:
+      - block
+    - editor:
+    - profile:
+    - functionality:
+  actions:
+    - index
+    - show
+    - create
+    - update
+    - destroy

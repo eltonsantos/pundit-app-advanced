@@ -1,6 +1,8 @@
 profile = Profile.create description: "Profile created by admin"
-Role.roles.map do |role, _|
-  profile.permissions.create role: role, can_create: 1, can_read: 1, can_update: 1, can_delete: 1
+Role.roles.map do |_, role|
+  role[:actions].each do |action|
+    profile.permissions.create role: role[:role], action: action, permit: true
+  end
 end
 
 Profile.create description: "Profile created by Manager", manager_id: 1

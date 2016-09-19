@@ -5,7 +5,7 @@
 
       <ul>
       <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li><%= message.to_s %></li>
       <% end %>
       </ul>
     </div>
@@ -35,16 +35,14 @@
   <fieldset>
     <legend>Permissões</legend>
 
-    <% f.object.permissions.in_groups_of(2, false) do |group| %>
+    <% Role.to_a.in_groups_of(2, false) do |group| %>
       <div class="row">
-        <% group.each do |permission| %>
+        <%- group.each do |role, label| %>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <% if current_user.admin? %>
-              <%= f.fields_for :permissions, permission do |p| %>
-                <%= render 'permission', f: p %>
-              <% end %>
-            <% else %>
-              <%= f.collection_check_boxes :permission, current_user.profile.permissions, :id, :role %>
+            <%- f.object.permissions.to_a.group_by(&:role).each do |role_name, permissions| %>
+              <% next if "#{role}" != "#{role_name}" -%>
+
+              <%= render 'permission', f: f, permissions: permissions, role: Role.role(role) %>
             <% end %>
           </div>
         <% end %>
