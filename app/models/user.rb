@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
   end
 
   # Método para da permissão aos usuários do sistema
-  def permission(role)
-    self.permissions.find_by(:role => role) || Permission.new
+  def permission(role, action)
+    self.permissions.find_by(:role => role, :action => action) || Permission.new
   end
 
 end
