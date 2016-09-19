@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :say_hello]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles
   # GET /profiles.json
@@ -16,8 +16,9 @@ class ProfilesController < ApplicationController
   end
 
   def say_hello
+    @profile = Profile.find(params[:profile_id])
     authorize @profile
-    flash[:notice] = "Nada!"
+    flash[:notice] = "Nada de mais aqui!"
   end
 
   # GET /profiles/new

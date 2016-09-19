@@ -5,6 +5,7 @@ role:
       - block
     - editor:
     - profile:
+      - say_hello
     - functionality:
   actions:
     - index
