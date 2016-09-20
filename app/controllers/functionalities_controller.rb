@@ -17,10 +17,12 @@ class FunctionalitiesController < ApplicationController
   # GET /functionalities/new
   def new
     @functionality = Functionality.new
+    authorize @functionality
   end
 
   # GET /functionalities/1/edit
   def edit
+    authorize @functionality
   end
 
   # POST /functionalities
