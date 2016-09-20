@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909183547) do
+ActiveRecord::Schema.define(version: 20160919075009) do
 
   create_table "editors", force: :cascade do |t|
     t.string   "description"
@@ -40,12 +40,10 @@ ActiveRecord::Schema.define(version: 20160909183547) do
   create_table "permissions", force: :cascade do |t|
     t.integer  "profile_id"
     t.string   "role"
-    t.boolean  "can_create", default: false
-    t.boolean  "can_read",   default: false
-    t.boolean  "can_update", default: false
-    t.boolean  "can_delete", default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "action",     default: "",    null: false
+    t.boolean  "permit",     default: false
   end
 
   add_index "permissions", ["profile_id"], name: "index_permissions_on_profile_id"

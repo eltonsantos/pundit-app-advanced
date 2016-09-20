@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :say_hello]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles
   # GET /profiles.json
@@ -16,8 +16,9 @@ class ProfilesController < ApplicationController
   end
 
   def say_hello
+    @profile = Profile.find(params[:profile_id])
     authorize @profile
-    flash[:notice] = "Nada!"
+    flash[:notice] = "Nada de mais aqui!"
   end
 
   # GET /profiles/new
@@ -84,19 +85,26 @@ class ProfilesController < ApplicationController
     end
 
   def build_roles_in(profile)
-    roles = Role.roles.map { |role, _| role.to_s }
+    roles = Role.roles.map do |_, role|
+      role[:actions].map {|action| "#{role[:role]}|-|#{action}" }
+    end.flatten
+
     used_roles = []
 
     profile.permissions.each do |permission|
-      used_roles << permission.role
+      role = "#{permission.role}|-|#{permission.action}"
 
-      permission.destroy unless roles.include?(permission.role)
+      used_roles << role
+
+      permission.destroy unless roles.include?(role)
     end
 
     roles.each do |role|
       next if role.in?(used_roles)
 
-      profile.permissions.build(role: role)
+      role_name, action = role.split("|-|")
+
+      profile.permissions.build(role: role_name, action: action)
     end
   end
 
@@ -106,7 +114,7 @@ class ProfilesController < ApplicationController
         :description, :manager_id, :editor_id, :active,
         functionality_ids: [],
         permissions_attributes: [
-          :id, :role, :can_read, :can_create, :can_update, :can_delete, :_destroy
+          :id, :role, :action, :permit, :_destroy
         ]
       )
     end
