@@ -34,28 +34,24 @@
 
   <fieldset>
     <legend>Permissões</legend>
-
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <%- Permission.where(profile_id: current_user.profile.id, permit: true).group_by(&:role).each do |id,role_name, permission, action| %>
-
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h4><%= role_name %></h4>
-          </div>
+    
+    <%- Permission.where(profile_id: current_user.profile.id, permit: true).group_by(&:role).each do |role_name, actions| %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h4><%=t role_name %></h4>
         </div>
+      </div>
 
+      <% actions.each do |action| %>
         <div class="row form-group">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-              <%= f.check_box :permission, value: id, label: action, checked: permission %>
-              <%= f.label :permission, action: action %>    
-            </div>
-          <br/>
-          <hr/>
+        <%= f.check_box :action, value: action.id, checked: false %>
+        <%= f.label :action, value: action.action %>
+            </div>            
         </div>
-
       <% end %>
-    </div>
-
+      <hr/>
+    <% end %>
 
   </fieldset>
 
