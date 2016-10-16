@@ -38,7 +38,6 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
-
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
@@ -112,7 +111,6 @@ class ProfilesController < ApplicationController
     def profile_params
       params.require(:profile).permit(
         :description, :manager_id, :editor_id, :active,
-        functionality_ids: [],
         permissions_attributes: [
           :id, :role, :action, :permit, :_destroy
         ]

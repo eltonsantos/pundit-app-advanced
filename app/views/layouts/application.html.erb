@@ -18,7 +18,9 @@
   <br>
   MENU
   <br>
-  <%= link_to "Profiles", profiles_path %>
+  <% if policy(Profile).index? %>
+    <%= link_to "Profiles", profiles_path %>
+  <% end %>
   ||
   <%= link_to "Managers", managers_path %>
   <%= link_to "Editors", editors_path %>
