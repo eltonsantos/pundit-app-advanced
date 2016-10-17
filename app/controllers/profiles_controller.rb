@@ -98,8 +98,20 @@ class ProfilesController < ApplicationController
       permission.destroy unless roles.include?(role)
     end
 
+    allow_roles = []
+
+    if current_user.admin
+      roles.each { |role| allow_roles << role }
+    else
+      current_user.permissions.where(permit: true).each do |permission|
+        role = "#{permission.role}|-|#{permission.action}"
+      
+        allow_roles << role
+      end
+    end
+
     roles.each do |role|
-      next if role.in?(used_roles)
+      next if role.in?(used_roles) || not(role.in?(allow_roles))
 
       role_name, action = role.split("|-|")
 

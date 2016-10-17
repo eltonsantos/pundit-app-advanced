@@ -34,35 +34,18 @@
 
   <fieldset>
     <legend>Permissões</legend>
-
-    <% if current_user.admin? %>
-      <% Role.to_a.in_groups_of(2, false) do |group| %>
-         <div class="row">
-           <%- group.each do |role, label| %>
-             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-               <%- f.object.permissions.to_a.group_by(&:role).each do |role_name, permissions| %>
-                 <% next if "#{role}" != "#{role_name}" -%>
-                 <%= render 'permission', f: f, permissions: permissions, role: Role.role(role) %>
-               <% end %>
-             </div>
-           <% end %>
-         </div>
-      <% end %>
-    <% else %>
-      <% Role.to_a.in_groups_of(2, false) do |group| %>
-         <div class="row">
-           <%- group.each do |role, label| %>
-             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-               <%- f.object.permissions.where(profile_id: current_user.profile.id, permit: true).to_a.group_by(&:role).each do |role_name, permissions| %>
-                 <% next if "#{role}" != "#{role_name}" -%>
-                 <%= render 'permission', f: f, permissions: permissions, role: Role.role(role) %>
-               <% end %>
-             </div>
-           <% end %>
-         </div>
-      <% end %>
+    <% Role.to_a.in_groups_of(2, false) do |group| %>
+      <div class="row">
+        <%- group.each do |role, label| %>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <%- f.object.permissions.to_a.group_by(&:role).each do |role_name, permissions| %>
+              <% next if "#{role}" != "#{role_name}" -%>
+              <%= render 'permission', f: f, permissions: permissions, role: Role.role(role) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-
   </fieldset>
 
   <div class="actions">
